@@ -18,7 +18,7 @@ const config = {
 };
 
 //const - no reassignment
-const game = new phaser.Game(config);
+const game = new Phaser.Game(config);
 
 //global var
 let car;
@@ -33,13 +33,13 @@ let cursors;
 
 // scene functions
 function preload(){
-    this.load.image("rb21", "assets/rb-19/png");
+    this.load.image("rb19", "assets/rb-19.png");
 }
 
 function create(){
     // center of the screen is 400, 300
     // will need to adjust the dimensions in config if need to change
-    car = this.physics.add.sprite(400,300, "rb21")
+    car = this.physics.add.sprite(400,300, "rb19")
     
     // adjusting the car size -- will change maybe
     car.setScale(0.5)
