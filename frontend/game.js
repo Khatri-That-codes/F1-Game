@@ -49,6 +49,14 @@ function create(){
 
     //getting the arrow keys
     cursors = this.input.keyboard.createCursorKeys();
+
+    //adding some physics stuff
+    car.setDamping(true);
+    car.setDrag(0.9); // this is to add friction
+    car.setMaxVelocity(200)
+    car.setAngularDrag(400)  //slowing rotation when not turning
+    car.setVelocity(0,0) // this is to have no initial drift
+
 }
 
 function update(){
