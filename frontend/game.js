@@ -42,13 +42,17 @@ function create(){
     car = this.physics.add.sprite(400,300, "rb19")
     
     // adjusting the car size -- will change maybe
-    car.setScale(0.5)
+    car.setScale(0.1)
+    car.body.setSize(50,100)
 
     //reducing the bounce
     car.setCollideWorldBounds(true)
 
     //getting the arrow keys
     cursors = this.input.keyboard.createCursorKeys();
+
+
+    car.setAngle(0); //facing upward
 
     //adding some physics stuff
     car.setDamping(true);
@@ -60,5 +64,27 @@ function create(){
 }
 
 function update(){
-    //TODO: handle movement
+    //making sure not moving when no key pressed
+    car.setAcceleration(0);
+    car.setAngularVelocity(0);
+
+    if (cursors.up.isDown){
+        //move forward
+        this.physics.velocityFromRotation(car.rotation - Math.PI / 2, 200, car.body.acceleration);
+
+    }
+    if (cursors.down.isDown){
+        //move backward
+        this.physics.velocityFromRotation(car.rotation - Math.PI / 2, -100, car.body.acceleration);
+
+    }
+    if (cursors.left.isDown){
+        //rotate left
+        car.setAngularVelocity(-150);
+    }
+    else if (cursors.right.isDown){
+        //rotate right
+        car.setAngularVelocity(150);
+    }
+
 }
