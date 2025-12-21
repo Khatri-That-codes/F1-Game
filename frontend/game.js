@@ -60,8 +60,9 @@ function create(){
     car.setAngle(-90);
 
     //adding some physics stuff
+    // use damping + a larger drag so the car slows down quickly when input stops
     car.setDamping(true);
-    car.setDrag(0.9); // this is to add friction
+    car.setDrag(600); // higher drag reduces long sliding
     car.setMaxVelocity(200);
     car.setAngularDrag(400);  //slowing rotation when not turning
     car.setVelocity(0,0); // this is to have no initial drift
@@ -105,6 +106,18 @@ function update(){
     else if (cursors.right.isDown){
         //rotate right
         car.setAngularVelocity(150);
+    }
+
+    // If there is no movement input at all, let drag slow the car and
+    // snap small velocities to zero to prevent long, slow sliding in any direction.
+    if (!cursors.up.isDown && !cursors.down.isDown && !cursors.left.isDown && !cursors.right.isDown) {
+        const vx = car.body.velocity.x;
+        const vy = car.body.velocity.y;
+        const speed = Math.sqrt(vx * vx + vy * vy);
+        // threshold in pixels/second — tweak as needed
+        if (speed < 10) {
+            car.setVelocity(0, 0);
+        }
     }
 
 }
