@@ -3,6 +3,10 @@ const config = {
     type: Phaser.AUTO,
     width: 800,
     height: 600,
+    scale: {
+        mode: Phaser.Scale.RESIZE,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -12,7 +16,7 @@ const config = {
 
     scene: {
         preload: preload,
-        create: create, 
+        create: create,
         update: update
     }
 };
@@ -37,29 +41,45 @@ function preload(){
 }
 
 function create(){
-    // center of the screen is 400, 300
-    // will need to adjust the dimensions in config if need to change
-    car = this.physics.add.sprite(400,300, "rb19")
-    
-    // adjusting the car size -- will change maybe
-    car.setScale(0.1)
-    car.body.setSize(50,100)
+    // place car at the current center of the canvas
+    car = this.physics.add.sprite(this.scale.width / 2, this.scale.height / 2, "rb19");
 
-    //reducing the bounce
-    car.setCollideWorldBounds(true)
+    // compute a base scale relative to the original design (800x600)
+    const baseScale = Math.min(this.scale.width / 800, this.scale.height / 600) || 1;
+    car.setScale(0.1 * baseScale);
+    car.body.setSize(50 * baseScale, 100 * baseScale);
+
+    // ensure physics world bounds match canvas size
+    this.physics.world.setBounds(0, 0, this.scale.width, this.scale.height);
+    car.setCollideWorldBounds(true);
 
     //getting the arrow keys
     cursors = this.input.keyboard.createCursorKeys();
 
-
-    car.setAngle(0); //facing upward
+    // orient the sprite so 'up' moves it forward
+    car.setAngle(-90);
 
     //adding some physics stuff
     car.setDamping(true);
     car.setDrag(0.9); // this is to add friction
-    car.setMaxVelocity(200)
-    car.setAngularDrag(400)  //slowing rotation when not turning
-    car.setVelocity(0,0) // this is to have no initial drift
+    car.setMaxVelocity(200);
+    car.setAngularDrag(400);  //slowing rotation when not turning
+    car.setVelocity(0,0); // this is to have no initial drift
+
+    // handle window / canvas resize: update bounds, reposition and rescale
+    this.scale.on('resize', (gameSize) => {
+        const width = gameSize.width;
+        const height = gameSize.height;
+
+        this.physics.world.setBounds(0, 0, width, height);
+
+        // reposition to center (optional: you may prefer to keep position)
+        car.setPosition(width / 2, height / 2);
+
+        const newBase = Math.min(width / 800, height / 600) || 1;
+        car.setScale(0.1 * newBase);
+        car.body.setSize(50 * newBase, 100 * newBase);
+    });
 
 }
 
