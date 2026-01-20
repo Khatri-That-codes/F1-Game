@@ -101,3 +101,56 @@ class F1App(tk.Tk):
 
         if loc_names:
             self.after(0, lambda: self.update_track_preview_by_name(self.location_var.get()))
+
+
+
+## animation 
+
+    # --- Animation helpers ---
+    def _set_output(self, text: str):
+        self.race_output.delete("1.0", tk.END)
+        self.race_output.insert("1.0", text)
+
+    def _append_output(self, text: str):
+        self.race_output.insert(tk.END, text)
+
+    def _animate_lights(self, on_done):
+        # 🔴 light-up sequence
+        frames = ["⚫⚫⚫⚫⚫", "🔴⚫⚫⚫⚫", "🔴🔴⚫⚫⚫", "🔴🔴🔴⚫⚫", "🔴🔴🔴🔴⚫", "🔴🔴🔴🔴🔴"]
+        idx = 0
+        def step():
+            nonlocal idx
+            if idx < len(frames):
+                self._append_output(f"\nStart Lights: {frames[idx]}")
+                idx += 1
+                self.after(350, step)
+            else:
+                self._append_output("\nLights out! 🟢 GO!\n")
+                on_done()
+        step()
+
+    def _show_progress(self, total_steps=20, on_done=None):
+        # show progress bar, tick deterministically
+        try:
+            self.race_progress.pack(fill="x", padx=8)
+        except Exception:
+            pass
+        self.race_progress["value"] = 0
+        cur = 0
+        def tick():
+            nonlocal cur
+            cur += 1
+            self.race_progress["value"] = cur * (100 / total_steps)
+            # Optional: show a minimal text spinner
+            self._append_output(".")
+            if cur < total_steps:
+                self.after(80, tick)
+            else:
+                self._append_output("\n")
+                try:
+                    self.race_progress.pack_forget()
+                except Exception:
+                    pass
+                if on_done:
+                    on_done()
+        tick()
