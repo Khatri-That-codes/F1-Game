@@ -4,6 +4,11 @@ This file contains popular lines said by teams and players in F1
 ## STILL NEED TO ADD MORE SAYINGS
 
 popular_lines_by_team = {
+    "f1" : [
+        "Formula 1 is the pinnacle of motorsport",
+        "Lights out and away we go!",
+    ],
+    
     "Ferrari" : [
         "Must be the water",
         "I am stupid",
