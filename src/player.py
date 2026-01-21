@@ -44,23 +44,37 @@ class Player:
         }
     
     @staticmethod
-    def load_player_from_json(data: dict, teams: list) -> 'Player':
+    def load_player_from_json(data: dict, team: str) -> 'Player':
         '''
         Static method to create a Player object from a JSON dictionary.
+
+        Requires the team list to be available to scan for existing teams.
         Parameters:
             data (dict): A dictionary containing player data.
-            teams (list): A list of Team objects to associate with the player.
-        Returns:
+            team (str): Team name of the player.
             Player: An instance of the Player class.
+
+        
         '''
 
         name = data.get("name", "Unknown Player")
-        team_name = data.get("racing_team", {}).get("name", "Unknown Team") 
-        racing_team = next((team for team in teams if team.name == team_name), None)
+        team_name = team if team != "" else None
+        racing_team = None
+
+        for team in Team.team_list:
+            if team.name == team_name:
+                racing_team = team
+                break 
+            
+
+        if team_name != "" and racing_team is None:
+            racing_team = Team(team_name)   
+        
         xp = data.get("XP", 0)
         player = Player(name, racing_team)
         player.XP = xp
         return player
+    
     
     def __eq__(self, other):
         if not isinstance(other, Player):

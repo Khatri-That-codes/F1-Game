@@ -3,10 +3,14 @@ This file handles the Team class, its attributes and methods
 '''
 
 class Team:
+
+    team_list = []  
     def __init__(self, name: str):
         self.name = name
         self.team_points = 0  # Total points for the team
         self.players = []  # List to hold players in the  - empty initially
+
+        Team.team_list.append(self)
 
     def add_team_points(self, points: int):
         '''
