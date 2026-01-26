@@ -294,3 +294,7 @@ class Diaglogues:
     def choose_random_message(message_list: list) -> str:
         return random.choice(message_list)
 
+
+    def get_random_event_commentary(event_type: str) -> str:
+        messages = Diaglogues.get_commentary_messages(event_type)
+        return Diaglogues.choose_random_message(messages)
