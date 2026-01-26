@@ -7,13 +7,18 @@ from src.models import Driver, Track, Incident
 from src.stewards import Stewards
 from typing import List
 
+from src.dialogues import Dialogues
+
 class RaceEngine:
 
+
+    
     def __init__(self, drivers: List[Driver], track: Track, weather: str):
         self.drivers = drivers
         self.track = track
         self.weather = weather
         self.incidents: List[Incident] = []
+        self.commentary_log: List[str] = []
 
     def qualify(self) -> List[Driver]:
         """
@@ -47,11 +52,22 @@ class RaceEngine:
             description=f"Incident involving {driver.name}",
             severity=severity
             )
-            self.incidents.append(Stewards.review_incident(incident))
+            reviewed_incident = Stewards.review_incident(incident)
+            self.incidents.append(reviewed_incident)
+
+            self.commentary_log.append(Dialogues.get_random_event_commentary("INCIDENT"))
+
+            self.commentary_log.append(
+            f"{driver.name} had an incident! Severity: {severity}"
+            f"Stewards decision: {reviewed_incident.penalty}"
+            )
 
 
     def run_race(self) -> List[Driver]:
         """Simulates the race result"""
+
+        self.commentary_log.append(Dialogues.get_random_event_commentary("START"))
+
         results = []
 
 
@@ -76,6 +92,8 @@ class RaceEngine:
 
 
         self.update_stats(final_order)
+
+        self.commentary_log.append(Dialogues.get_random_event_commentary("FINISH"))
         return final_order
 
 
