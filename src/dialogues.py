@@ -5,7 +5,7 @@ This file contains popular lines said by teams and players in F1
 
 import random
 
-class Diaglogues:
+class Dialogues:
     
     ## Race commentary by commentators
     commentary_messages = {
@@ -271,22 +271,22 @@ class Diaglogues:
 
     @staticmethod
     def get_team_radio(team_name: str) -> list:
-        return Diaglogues.F1_Team_Radio.get(team_name, [])
+        return Dialogues.F1_Team_Radio.get(team_name, [])
     
 
     @staticmethod
     def get_driver_radio(driver_name: str) -> list:
-        return Diaglogues.F1_Driver_Radio.get(driver_name, [])
+        return Dialogues.F1_Driver_Radio.get(driver_name, [])
     
 
     @staticmethod
     def get_generic_radio_messages() -> list:
-        return Diaglogues.generic_radio_messages
+        return Dialogues.generic_radio_messages
     
 
     @staticmethod
     def get_commentary_messages(event_type: str) -> list:
-        return Diaglogues.commentary_messages.get(event_type, [])
+        return Dialogues.commentary_messages.get(event_type, [])
     
 
 
@@ -296,5 +296,5 @@ class Diaglogues:
 
 
     def get_random_event_commentary(event_type: str) -> str:
-        messages = Diaglogues.get_commentary_messages(event_type)
-        return Diaglogues.choose_random_message(messages)
+        messages = Dialogues.get_commentary_messages(event_type)
+        return Dialogues.choose_random_message(messages)
