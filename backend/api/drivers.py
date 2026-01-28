@@ -16,7 +16,19 @@ def get_all_drivers():
     """
     this endpoint returns a list of all drivers.
     """
-    return [DriverModel(**vars(driver)) for driver in ALL_DRIVERS.values()]
+    return [
+        DriverModel(
+            **{key: value for key, value in vars(driver).items() if key != "stats"},
+            stats=StatsModel(
+                total_wins=driver.stats.total_wins,
+                total_podiums=driver.stats.total_podiums,
+                total_poles=driver.stats.total_poles,
+                total_dnfs=driver.stats.total_dnfs,
+                total_points=driver.stats.total_points
+            )
+        )
+        for driver in ALL_DRIVERS.values()
+    ]
 
 
 
