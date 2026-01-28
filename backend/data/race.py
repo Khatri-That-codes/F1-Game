@@ -6,6 +6,7 @@ from backend.data.drivers import Driver
 from backend.data.tracks import Track
 from backend.data.weather import WEATHER_CONDITION
 from src.race_engine import RaceEngine
+from pydantic import BaseModel
 
 class Race:
     def __init__(self, drivers: List[Driver], track: Track, weather: WEATHER_CONDITION):
@@ -32,3 +33,9 @@ class Race:
             "commentary": self.engine.commentary_log,
         }
     
+
+
+class RaceModel(BaseModel):
+    drivers: List[Driver]
+    track: Track
+    weather: WEATHER_CONDITION

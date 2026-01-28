@@ -4,11 +4,11 @@ manages the api endpoints for the race
 
 from typing import List
 from fastapi import APIRouter, HTTPException
-from backend.data.drivers import Driver, ALL_DRIVERS
-from backend.data.tracks import Track, ALL_TRACKS
+from backend.data.drivers import Driver, ALL_DRIVERS, DriverModel
+from backend.data.tracks import Track, ALL_TRACKS, TrackModel
 
 from src.race_engine import RaceEngine
-from backend.data.race import Race
+from backend.data.race import Race, RaceModel
 from fastapi import WebSocket, WebSocketDisconnect
 
 
