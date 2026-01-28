@@ -3,7 +3,7 @@ Module for managing track data.
 """
 
 from typing import Dict, List
-from data.weather import WEATHER_CONDITION
+from data.weather import WEATHER_CONDITION, WeatherModel
 from enum import Enum
 from pydantic import BaseModel
 
@@ -37,5 +37,5 @@ class TrackModel(BaseModel):
     name: str
     country: str
     number_laps: int
-    weather_options: List[WEATHER_CONDITION]
+    weather_options: List[WeatherModel]  # Updated to use WeatherModel
     image_path: str

@@ -14,7 +14,16 @@ def get_all_tracks():
     """
     this endpoint returns a list of all tracks.
     """
-    return [TrackModel(**vars(track)) for track in ALL_TRACKS.values()]
+    return [
+        TrackModel(
+            name=track.name,
+            country=track.country,
+            number_laps=track.number_laps,
+            weather_options=[condition.to_model() for condition in track.weather_options],
+            image_path=track.image_path
+        )
+        for track in ALL_TRACKS.values()
+    ]
 
 
 #getting a single track by track name
@@ -28,4 +37,10 @@ def get_track(track_name: str):
     if not track:
          raise HTTPException(status_code=404, detail="Track not found")
     
-    return TrackModel(**vars(track))
+    return TrackModel(
+        name=track.name,
+        country=track.country,
+        number_laps=track.number_laps,
+        weather_options=[condition.to_model() for condition in track.weather_options],
+        image_path=track.image_path
+    )
