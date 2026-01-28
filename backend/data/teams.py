@@ -5,6 +5,7 @@ This file manages all the team data for the racing simulation game.
 from typing import Dict, List, Optional
 from data.colour_palette import TEAM_COLORS
 from pydantic import BaseModel
+from data.models import DriverModel
 
 
 class Team:
@@ -39,6 +40,6 @@ class TeamModel(BaseModel):
     base: str
     principal: str
     championships: int = 0
-    drivers: List= []
+    drivers: List[DriverModel] = []
 
 

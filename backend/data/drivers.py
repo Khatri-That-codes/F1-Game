@@ -5,8 +5,9 @@ This file manages driver data for the racing simulation game.
 from typing import Dict, Any
 
 from data.teams import ALL_TEAMS, Team
-from data.stats import Stats
+from data.stats import Stats, StatsModel
 from pydantic import BaseModel
+from data.models import DriverModel
 class Driver:
     def __init__(self, name: str, team: Team, number: int, nation: str,  qualifying: int, aggression: int):
         self.name = name
@@ -74,4 +75,4 @@ class DriverModel(BaseModel):
     aggression: int
     isActive: bool
     driver_image: str
-    stats: Any  # this should be of stats type
+    stats: StatsModel
