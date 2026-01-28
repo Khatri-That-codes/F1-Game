@@ -3,9 +3,9 @@ Module for managing track data.
 """
 
 from typing import Dict, List
-from assets.ascii.ascii_tracks import _ascii_tracks
 from data.weather import WEATHER_CONDITION
 from enum import Enum
+from pydantic import BaseModel
 
 class Track:
     def __init__(self, name: str, country: str, number_laps: int,  weather_options: WEATHER_CONDITION):
@@ -31,3 +31,11 @@ ALL_TRACKS: Dict[str, Track] = {
 
     "generic track": Track("Generic Track", "Nowhere", 50, [WEATHER_CONDITION.SUNNY, WEATHER_CONDITION.RAINY, WEATHER_CONDITION.CLOUDY, WEATHER_CONDITION.STORMY])
 }
+
+
+class TrackModel(BaseModel):
+    name: str
+    country: str
+    number_laps: int
+    weather_options: List[WEATHER_CONDITION]
+    image_path: str
