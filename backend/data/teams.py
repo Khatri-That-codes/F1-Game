@@ -3,11 +3,12 @@ This file manages all the team data for the racing simulation game.
 """
 
 from typing import Dict, List, Optional
-from theme.colour_palette import TEAM_COLORS
-from data.drivers import Driver
+from data.colour_palette import TEAM_COLORS
+from pydantic import BaseModel
+
 
 class Team:
-    def __init__(self, name: str, team_colour: str, base: str, principal: str, championships: int = 0, drivers: Optional[List[Driver]] = None):
+    def __init__(self, name: str, team_colour: str, base: str, principal: str, championships: int = 0, drivers: Optional[List] = None):
         self.name = name
         self.team_colour = team_colour
         self.team_points = 0  
@@ -28,3 +29,16 @@ ALL_TEAMS: Dict[str, Team] = {
     "williams": Team("Williams", TEAM_COLORS["williams"], "Grove, UK", "James Vowles", 9),
     "sauber": Team("Sauber", TEAM_COLORS["sauber"], "Hinwil, Switzerland", "Alessandro Alunni Bravi", 0)
 }
+
+
+class TeamModel(BaseModel):
+    name: str
+    team_colour: str
+    team_points: int = 0
+    logo_path: str
+    base: str
+    principal: str
+    championships: int = 0
+    drivers: List= []
+
+
