@@ -15,7 +15,7 @@ class Track:
         self.weather_options = weather_options
 
       #neeed to addd check to replace with generic image if not found 
-        self.image_path = f"assets/tracks/{self.name.lower().replace(' ', '_')}.png"
+        self.image_path = f"assets/images/tracks/{self.name.lower().replace(' ', '_')}.png"
 
 
 

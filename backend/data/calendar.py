@@ -21,3 +21,5 @@ def get_current_race(current_index: int) -> str:
 def reset_season() -> int:
     """Reset the season to the first race."""
     return 0
+
+    

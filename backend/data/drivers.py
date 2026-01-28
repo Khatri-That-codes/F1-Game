@@ -3,8 +3,9 @@ This file manages driver data for the racing simulation game.
 '''
 
 from typing import Dict, Any
-from teams import ALL_TEAMS, Team
-from stats import Stats
+
+from data.teams import ALL_TEAMS, Team
+from data.stats import Stats
 
 class Driver:
     def __init__(self, name: str, team: Team, number: int, nation: str,  qualifying: int, aggression: int):
@@ -21,14 +22,14 @@ class Driver:
 
 
         # need to add check for this part. replace with generic image if not found
-        self.driver_image = f"assets/drivers/{self.name.lower().replace(' ', '_')}.png"
+        self.driver_image = f"assets/images/drivers/{self.name.lower().replace(' ', '_')}.png"
     
         
         # need to see this part
         self.stats: Stats = Stats()
 
 
-
+# might need to add system to increment driver skill over time (per wins or xp)
     def add_xp(self, amount: int):
         """Add experience points to the driver."""
         self.xp += amount
