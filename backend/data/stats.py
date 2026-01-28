@@ -4,6 +4,7 @@ This file is for managing driver statistics in the racing simulation game.
 
 #making an enum for stats to maintain consistency
 from enum import Enum
+from pydantic import BaseModel
 
 class Stat(Enum):
     WINS = "total_wins"
@@ -37,4 +38,9 @@ class Stats:
     
 
     
-        
+class StatsModel(BaseModel):
+    total_wins: int = 0
+    total_podiums: int = 0
+    total_poles: int = 0
+    total_dnfs: int = 0
+    total_points: int = 0
