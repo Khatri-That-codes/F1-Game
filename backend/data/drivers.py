@@ -6,7 +6,7 @@ from typing import Dict, Any
 
 from data.teams import ALL_TEAMS, Team
 from data.stats import Stats
-
+from pydantic import BaseModel
 class Driver:
     def __init__(self, name: str, team: Team, number: int, nation: str,  qualifying: int, aggression: int):
         self.name = name
@@ -62,3 +62,16 @@ ALL_DRIVERS: Dict[str, Driver] = {
     # need to add alpine, sauber drivers 
     
 }
+
+
+class DriverModel(BaseModel):
+    name: str
+    team_name: str
+    number: int
+    nation: str
+    xp: int
+    qualifying: int
+    aggression: int
+    isActive: bool
+    driver_image: str
+    stats: Any  # this should be of stats type
