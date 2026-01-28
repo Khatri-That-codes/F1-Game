@@ -12,6 +12,9 @@ class Driver:
         self.name = name
         self.team = team
         self.team_name = team.name
+        
+        #add driver to team's driver list
+        team.drivers.append(self)
         self.number = number
         self.nation = nation  # need to decide if this is emoji or name of country
         self.xp = 0 #starting with zero
