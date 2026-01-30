@@ -26,7 +26,7 @@ class Driver:
 
 
         # need to add check for this part. replace with generic image if not found
-        self.driver_image = f"assets/images/drivers/{self.name.lower().replace(' ', '_')}.png"
+        self.driver_image = f"/assets/images/drivers/{self.name.lower().replace(' ', '_')}.png"
     
         
         # need to see this part

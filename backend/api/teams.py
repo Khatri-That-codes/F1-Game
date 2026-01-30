@@ -2,6 +2,7 @@
 API endpoints for managing teams.
 
 '''
+from urllib.parse import unquote
 from fastapi import APIRouter
 from data.teams import ALL_TEAMS, Team, TeamModel
 from data.drivers import DriverModel
@@ -45,11 +46,25 @@ def get_all_teams():
 @teams_router.get("/teams/{team_name}", response_model=TeamModel)
 def get_team(team_name: str):
     """
-    this endpoint returns a single team by name.
+    This endpoint returns a single team by name.
     """
-    team_name = team_name.lower()  #need to normalize
+    team_name = unquote(team_name)
+    team_name = team_name.lower()  # Normalize the name
     team = ALL_TEAMS.get(team_name)
     if not team:
-         raise HTTPException(status_code=404, detail="Team not found")
-    
-    return TeamModel(**vars(team))
+        raise HTTPException(status_code=404, detail="Team not found")
+
+    # Convert drivers to DriverModel
+    drivers = [
+        DriverModel(
+            **{key: value for key, value in vars(driver).items() if key != "stats"},
+            stats=StatsModel(**vars(driver.stats))
+        ).dict()
+        for driver in team.drivers
+    ]
+
+    # Return the TeamModel with properly serialized drivers
+    return TeamModel(
+        **{key: value for key, value in vars(team).items() if key != "drivers"},
+        drivers=drivers
+    )
