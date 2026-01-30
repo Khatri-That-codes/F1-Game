@@ -1,0 +1,105 @@
+/* Theme file for centralized styles */
+
+@font-face {
+    font-family: 'Press Start 2P';
+    src: url('assets/fonts/PressStart2P-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+  --background-color: #1a1a1a; 
+  --text-color: #fff; 
+  --primary-color: #ff1801; 
+  --primary-hover-color: #d41601; 
+  --card-background: #111;
+  --card-shadow: rgba(0, 0, 0, 0.2);
+  --table-border: #ddd;
+  --table-row-hover: #333;
+  --table-row-alt: #222;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Arial', sans-serif;
+  color: var(--primary-color);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+button {
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: var(--primary-hover-color);
+  transform: scale(1.05);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid var(--table-border);
+}
+
+table th {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+table tr:nth-child(even) {
+  background-color: var(--table-row-alt);
+}
+
+table tr:hover {
+  background-color: var(--table-row-hover);
+}
+
+.card {
+  background-color: var(--card-background);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--card-shadow);
+  padding: 20px;
+  color: var(--text-color);
+}
+
+.card h3 {
+  color: var(--primary-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
