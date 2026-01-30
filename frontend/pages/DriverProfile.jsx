@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; 
-import { fetchDriverDetails } from "../api"; 
+import { fetchDriverDetails } from "../api";
+import { useTheme } from "../context/ThemeContext"; 
 
 const DriverProfile = () => {
+  const { theme } = useTheme();
   const { driverName } = useParams(); // Getting name of driver from url
   const [driver, setDriver] = useState(null); 
   const [error, setError] = useState(null); 
@@ -23,7 +25,23 @@ const DriverProfile = () => {
   }
 
   return (
-    <div style={styles.container}>
+    <div style={{
+      backgroundColor: theme.backgroundColor,
+      color: theme.textColor,
+      minHeight: '100vh',
+      padding: '40px 20px',
+      fontFamily: '"Press Start 2P", Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <h1 style={{ color: theme.primaryColor, marginBottom: '40px', textAlign: 'center' }}>Driver Profile</h1>
+      <div style={{
+        ...styles.container,
+        backgroundColor: theme.cardBackground,
+        boxShadow: `0 8px 16px ${theme.cardShadow}`
+      }}>
       {/* Driver Image */}
       <div style={styles.imageContainer}>
         <img
@@ -54,6 +72,7 @@ const DriverProfile = () => {
         </p>
       </div>
     </div>
+    </div>
   );
 };
 
@@ -64,13 +83,11 @@ const styles = {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    padding: "20px",
-    fontFamily: "'Arial', sans-serif",
-    backgroundColor: "#f4f4f9",
-    borderRadius: "10px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    maxWidth: "800px",
-    margin: "40px auto",
+    padding: "30px",
+    fontFamily: "'Press Start 2P', Arial, sans-serif",
+    borderRadius: "15px",
+    maxWidth: "900px",
+    width: "100%",
   },
   imageContainer: {
     flex: 1,
@@ -88,17 +105,17 @@ const styles = {
   },
   name: {
     fontSize: "2rem",
-    color: "#333",
+    color: "#fff",
     marginBottom: "10px",
   },
   team: {
     fontSize: "1.5rem",
-    color: "#555",
+    color: "#000",
     marginBottom: "20px",
   },
   detail: {
     fontSize: "1rem",
-    color: "#666",
+    color: "#fff",
     marginBottom: "10px",
   },
 };

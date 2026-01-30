@@ -31,11 +31,25 @@ const ResultsScreen = () => {
       backgroundColor: theme.backgroundColor,
       color: theme.textColor,
       minHeight: "100vh",
-      padding: "20px",
+      padding: "40px 20px",
+      fontFamily: '"Press Start 2P", Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }}>
-      <h1 style={{ color: theme.primaryColor }}>Race Results</h1>
+      <h1 style={{ 
+        color: theme.primaryColor, 
+        marginBottom: '40px',
+        fontSize: '2.5rem',
+        textAlign: 'center'
+      }}>Race Results</h1>
 
-      <div style={{ display: "grid", gap: "10px" }}>
+      <div style={{ 
+        display: "grid", 
+        gap: "20px",
+        width: '100%',
+        maxWidth: '800px'
+      }}>
         {raceResults.final_results.map((driver, index) => (
           <Card
             key={driver}

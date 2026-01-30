@@ -4,12 +4,12 @@ const ThemeContext = createContext();
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState({
-    backgroundColor: '#000',
+    backgroundColor: '#ff1801',
     textColor: '#fff',
-    primaryColor: '#ff1801',
-    primaryHoverColor: '#d41601',
-    cardBackground: '#111',
-    cardShadow: 'rgba(0, 0, 0, 0.2)',
+    primaryColor: '#000',
+    primaryHoverColor: '#333',
+    cardBackground: 'rgba(0, 0, 0, 0.3)',
+    cardShadow: 'rgba(0, 0, 0, 0.5)',
   });
 
   const toggleTheme = () => {

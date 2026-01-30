@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; 
-import { fetchTeamDetails } from "../api"; 
+import { fetchTeamDetails } from "../api";
+import { useTheme } from "../context/ThemeContext"; 
 
 const TeamProfile = () => {
+  const { theme } = useTheme();
   const { teamName } = useParams(); // Get team name from URL
   const [team, setTeam] = useState(null); 
   const [error, setError] = useState(null); 
@@ -23,9 +25,24 @@ const TeamProfile = () => {
   }
 
   return (
-    <div style={styles.container}>
+    <div style={{
+      backgroundColor: theme.backgroundColor,
+      color: theme.textColor,
+      minHeight: '100vh',
+      padding: '40px 20px',
+      fontFamily: '"Press Start 2P", Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }}>
+      <h1 style={{ color: theme.primaryColor, marginBottom: '40px', textAlign: 'center' }}>Team Profile</h1>
+      
       {/* Team Logo and Details */}
-      <div style={styles.header}>
+      <div style={{
+        ...styles.header,
+        backgroundColor: theme.cardBackground,
+        boxShadow: `0 8px 16px ${theme.cardShadow}`
+      }}>
         <img src={team.logo} alt={team.name} style={styles.logo} />
         <div style={styles.details}>
           <h1 style={styles.name}>{team.name}</h1>
@@ -70,19 +87,21 @@ const TeamProfile = () => {
 // Inline styles for the page
 const styles = {
   container: {
-    padding: "20px",
-    fontFamily: "'Arial', sans-serif",
-    backgroundColor: "#f4f4f9",
+    padding: "40px 20px",
+    fontFamily: "'Press Start 2P', Arial, sans-serif",
     minHeight: "100vh",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   header: {
     display: "flex",
     alignItems: "center",
     marginBottom: "40px",
-    backgroundColor: "#fff",
-    borderRadius: "10px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    padding: "20px",
+    borderRadius: "15px",
+    padding: "30px",
+    maxWidth: "800px",
+    width: "100%"
   },
   logo: {
     width: "150px",

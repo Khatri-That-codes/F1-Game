@@ -40,8 +40,17 @@ const ViewTeams = () => {
   };
 
   return (
-    <div style={{ ...styles.container, backgroundColor: theme.backgroundColor, color: theme.textColor }}>
-      <h1 style={{ color: theme.primaryColor }}>View Teams</h1>
+    <div style={{
+      backgroundColor: theme.backgroundColor,
+      color: theme.textColor,
+      minHeight: '100vh',
+      padding: '40px 20px',
+      fontFamily: '"Press Start 2P", Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }}>
+      <h1 style={{ color: theme.primaryColor, marginBottom: '30px', textAlign: 'center', fontSize: '2rem' }}>View Teams</h1>
 
       <input
         type="text"
@@ -49,16 +58,33 @@ const ViewTeams = () => {
         value={searchQuery}
         onChange={handleSearchChange}
         style={{
-          padding: "10px",
-          marginBottom: "20px",
-          borderRadius: "5px",
-          border: `1px solid ${theme.primaryColor}`,
+          padding: "15px 20px",
+          marginBottom: "30px",
+          borderRadius: "10px",
+          border: `2px solid ${theme.primaryColor}`,
+          backgroundColor: theme.cardBackground,
+          color: theme.textColor,
+          fontFamily: '"Press Start 2P", Arial, sans-serif',
+          fontSize: '0.8rem',
+          width: '100%',
+          maxWidth: '400px'
         }}
       />
 
-      <div style={{ display: "grid", gap: "20px" }}>
+      <div style={{ 
+        display: "grid", 
+        gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+        gap: "30px",
+        width: '100%',
+        maxWidth: '1200px'
+      }}>
         {filteredTeams.map((team) => (
-          <Card key={team.id} style={styles.card}>
+          <div key={team.id} style={{
+            ...styles.card,
+            backgroundColor: theme.cardBackground,
+            boxShadow: `0 8px 16px ${theme.cardShadow}`,
+            border: `2px solid ${theme.primaryColor}`
+          }} onClick={() => handleTeamClick(team.name)}>
             <h2>{team.name}</h2>
             <p>Principal: {team.principal}</p>
             <p>Base: {team.base}</p>
@@ -68,7 +94,7 @@ const ViewTeams = () => {
             >
               View Profile
             </button>
-          </Card>
+          </div>
         ))}
       </div>
     </div>
@@ -80,17 +106,16 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    gap: "20px",
-    padding: "20px",
+    gap: "30px",
+    padding: "40px 20px",
   },
   card: {
     cursor: "pointer",
-    width: "200px",
     textAlign: "center",
-    padding: "10px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    transition: "transform 0.2s",
+    padding: "25px",
+    borderRadius: "15px",
+    transition: "transform 0.3s, box-shadow 0.3s",
+    fontFamily: '"Press Start 2P", Arial, sans-serif'
   },
   image: {
     width: "100%",

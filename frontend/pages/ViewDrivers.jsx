@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fetchDrivers } from "../api";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 const ViewDrivers = () => {
+  const { theme } = useTheme();
   const [drivers, setDrivers] = useState([]); // All drivers fetched from the backend
   const [searchQuery, setSearchQuery] = useState(""); // Search query
   const [filteredDrivers, setFilteredDrivers] = useState([]); 
@@ -50,42 +52,73 @@ const ViewDrivers = () => {
   };
 
   return (
-    <div>
-      <h1>View Drivers</h1>
+    <div style={{
+      backgroundColor: theme.backgroundColor,
+      color: theme.textColor,
+      minHeight: '100vh',
+      padding: '40px 20px',
+      fontFamily: '"Press Start 2P", Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }}>
+      <h1 style={{ color: theme.primaryColor, marginBottom: '30px', textAlign: 'center', fontSize: '2rem' }}>View Drivers</h1>
 
       {/* Search Bar */}
-      <div>
+      <div style={{ marginBottom: '40px', width: '100%', maxWidth: '400px' }}>
         <input
           type="text"
           placeholder="Search for a driver..."
           value={searchQuery}
           onChange={handleSearchChange}
+          style={{
+            padding: "15px 20px",
+            borderRadius: "10px",
+            border: `2px solid ${theme.primaryColor}`,
+            backgroundColor: theme.cardBackground,
+            color: theme.textColor,
+            fontFamily: '"Press Start 2P", Arial, sans-serif',
+            fontSize: '0.8rem',
+            width: '100%'
+          }}
         />
       </div>
 
       {/* Display Drivers by Team */}
-      <div>
+      <div style={{ width: '100%', maxWidth: '1200px' }}>
         {Object.keys(driversByTeam).map((team) => (
-          <div key={team}>
-            <h2>{team}</h2>
-            <ul>
+          <div key={team} style={{ marginBottom: '50px' }}>
+            <h2 style={{ 
+              color: theme.primaryColor, 
+              textAlign: 'center', 
+              marginBottom: '30px',
+              fontSize: '1.5rem',
+              borderBottom: `2px solid ${theme.primaryColor}`,
+              paddingBottom: '10px'
+            }}>{team}</h2>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '25px',
+              padding: '0 20px'
+            }}>
               {driversByTeam[team].map((driver) => (
-                <li key={driver.name}>
-                  <div
-                    style={styles.card}
-                    onClick={() => handleDriverClick(driver.name)}
-                  >
-                    <img
-                      src={driver.driver_image}
-                      alt={driver.name}
-                      style={styles.image}
-                    />
-                    <h3 style={styles.name}>{driver.name}</h3>
-                    <p style={styles.team}>{driver.team_name}</p>
-                  </div>
-                </li>
+                <div key={driver.name} style={{
+                  ...styles.card,
+                  backgroundColor: theme.cardBackground,
+                  boxShadow: `0 8px 16px ${theme.cardShadow}`,
+                  border: `2px solid ${theme.primaryColor}`
+                }} onClick={() => handleDriverClick(driver.name)}>
+                  <img
+                    src={driver.driver_image}
+                    alt={driver.name}
+                    style={styles.image}
+                  />
+                  <h3 style={{ ...styles.name, color: theme.textColor }}>{driver.name}</h3>
+                  <p style={{ ...styles.team, color: theme.primaryColor }}>{driver.team_name}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>
@@ -98,32 +131,35 @@ const styles = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    gap: "20px",
-    padding: "20px",
+    gap: "30px",
+    padding: "40px 20px",
   },
   card: {
     cursor: "pointer",
-    width: "200px",
     textAlign: "center",
-    padding: "10px",
-    borderRadius: "10px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    transition: "transform 0.2s",
+    padding: "25px",
+    borderRadius: "15px",
+    transition: "transform 0.3s, box-shadow 0.3s",
+    fontFamily: '"Press Start 2P", Arial, sans-serif'
   },
   cardHover: {
     transform: "scale(1.05)",
   },
   image: {
     width: "100%",
+    maxWidth: "150px",
+    height: "150px",
+    objectFit: "cover",
     borderRadius: "10px",
+    marginBottom: "15px"
   },
   name: {
-    fontSize: "1.2rem",
-    margin: "10px 0",
+    fontSize: "1rem",
+    margin: "15px 0 10px 0",
   },
   team: {
-    fontSize: "1rem",
-    color: "#555",
+    fontSize: "0.8rem",
+    fontWeight: "bold"
   },
 };
 

@@ -35,12 +35,31 @@ const RaceIntroScreen = () => {
         backgroundColor: theme.backgroundColor,
         color: theme.textColor,
         minHeight: "100vh",
-        padding: "20px",
+        padding: "40px 20px",
+        fontFamily: '"Press Start 2P", Arial, sans-serif',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
     >
-      <h1 style={{ color: theme.primaryColor }}>Race Introduction</h1>
+      <h1 style={{ 
+        color: theme.primaryColor, 
+        marginBottom: '40px',
+        fontSize: '2.5rem',
+        textAlign: 'center' 
+      }}>Race Introduction</h1>
 
-      <Card>
+      <Card style={{
+        backgroundColor: theme.cardBackground,
+        border: `3px solid ${theme.primaryColor}`,
+        borderRadius: '20px',
+        padding: '40px',
+        maxWidth: '600px',
+        width: '100%',
+        textAlign: 'center',
+        boxShadow: `0 10px 20px ${theme.cardShadow}`
+      }}>
         <h2>Track: {selectedTrack.name}</h2>
         <img
           src={selectedTrack.image}

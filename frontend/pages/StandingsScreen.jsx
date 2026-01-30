@@ -19,9 +19,28 @@ const StandingsScreen = () => {
       backgroundColor: theme.backgroundColor,
       color: theme.textColor,
       minHeight: "100vh",
-      padding: "20px",
+      padding: "40px 20px",
+      fontFamily: '"Press Start 2P", Arial, sans-serif',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
     }}>
-      <h1 style={{ color: theme.primaryColor }}>Season Standings</h1>
+      <h1 style={{ 
+        color: theme.primaryColor, 
+        marginBottom: '40px',
+        fontSize: '2.5rem',
+        textAlign: 'center'
+      }}>Season Standings</h1>
+
+      <div style={{
+        backgroundColor: theme.cardBackground,
+        border: `3px solid ${theme.primaryColor}`,
+        borderRadius: '20px',
+        padding: '30px',
+        maxWidth: '800px',
+        width: '100%',
+        boxShadow: `0 10px 20px ${theme.cardShadow}`
+      }}>
 
       <Table
         headers={["Position", "Driver", "Team", "Points"]}
@@ -32,6 +51,7 @@ const StandingsScreen = () => {
           driver.points,
         ])}
       />
+    </div>
     </div>
   );
 };
