@@ -58,7 +58,7 @@ const MainMenu = () => {
         {/* <h1 style={styles.title}>F1 Racing Game</h1> */}
 
         <div style={{ display: "flex", flexDirection: "row", gap: "10px" }}>
-          <Button onClick={() => navigate("/race")}>Start Race</Button>
+          <Button onClick={() => navigate("/track-select")}>Start Race</Button>
           <Button onClick={() => navigate("/drivers")}>View Drivers</Button>
           <Button onClick={() => navigate("/teams")}>View Teams</Button>
           <Button onClick={() => navigate("/standings")}>View Standings</Button>
