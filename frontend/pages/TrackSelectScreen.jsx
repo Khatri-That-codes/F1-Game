@@ -105,7 +105,7 @@ const TrackSelectScreen = () => {
           padding: '15px 30px',
           borderRadius: '10px',
           border: 'none'
-        }} onClick={handleProceedToIntro}>Proceed to Race Intro</Button>
+        }} onClick={handleProceedToIntro}>Proceed</Button>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import { useTheme } from "../context/ThemeContext";
 const StandingsScreen = () => {
   const { theme } = useTheme();
   const [standings, setStandings] = useState([]); // Overall standings fetched from the backend
+  const background_Image = "/assets/images/ui/standings.jpg";
 
   // Fetch standings from the backend
   useEffect(() => {
@@ -16,7 +17,7 @@ const StandingsScreen = () => {
 
   return (
     <div style={{
-      backgroundColor: theme.backgroundColor,
+      backgroundImage: `url(${background_Image})`,
       color: theme.textColor,
       minHeight: "100vh",
       padding: "40px 20px",
@@ -28,12 +29,13 @@ const StandingsScreen = () => {
       <h1 style={{ 
         color: theme.primaryColor, 
         marginBottom: '40px',
-        fontSize: '2.5rem',
-        textAlign: 'center'
+        fontSize: '2rem',
+        textAlign: 'center',
+        fontFamily: "'Press Start 2P', Arial, sans-serif"
       }}>Season Standings</h1>
 
       <div style={{
-        backgroundColor: theme.cardBackground,
+        backgroundColor: "#a81919",
         border: `3px solid ${theme.primaryColor}`,
         borderRadius: '20px',
         padding: '30px',

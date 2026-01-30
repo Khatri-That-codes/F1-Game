@@ -10,6 +10,7 @@ const ViewTeams = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredTeams, setFilteredTeams] = useState([]);
   const navigate = useNavigate();
+  const background_Image = "/assets/images/ui/empty_grandstand.webp";
 
   useEffect(() => {
     const getTeams = async () => {
@@ -36,21 +37,33 @@ const ViewTeams = () => {
   };
 
   const handleTeamClick = (teamName) => {
-    navigate(`/team-profile/${teamName}`);
+    const formattedName = teamName.replace(" ", "_").toLowerCase();
+    navigate(`/team-profile/${encodeURIComponent(formattedName)}`);
   };
 
   return (
     <div style={{
-      backgroundColor: theme.backgroundColor,
-      color: theme.textColor,
-      minHeight: '100vh',
-      padding: '40px 20px',
-      fontFamily: '"Press Start 2P", Arial, sans-serif',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
+        backgroundImage: `url(${background_Image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        padding: "70px 20px",
+        fontFamily: '"Press Start 2P", Arial, sans-serif',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+      // backgroundColor: theme.backgroundColor,
+      // color: theme.textColor,
+      // minHeight: '100vh',
+      // padding: '40px 20px',
+      // fontFamily: '"Press Start 2P", Arial, sans-serif',
+      // display: 'flex',
+      // flexDirection: 'column',
+      // alignItems: 'center'
     }}>
-      <h1 style={{ color: theme.primaryColor, marginBottom: '30px', textAlign: 'center', fontSize: '2rem' }}>View Teams</h1>
+      {/* <h1 style={{ color: theme.primaryColor, marginBottom: '30px', textAlign: 'center', fontSize: '2rem' }}>View Teams</h1> */}
 
       <input
         type="text"
@@ -83,17 +96,24 @@ const ViewTeams = () => {
             ...styles.card,
             backgroundColor: theme.cardBackground,
             boxShadow: `0 8px 16px ${theme.cardShadow}`,
-            border: `2px solid ${theme.primaryColor}`
+            border: `2px solid ${theme.primaryColor}`, 
+            alignItems: "center",
           }} onClick={() => handleTeamClick(team.name)}>
-            <h2>{team.name}</h2>
-            <p>Principal: {team.principal}</p>
-            <p>Base: {team.base}</p>
-            <button
+            <h2 style={{fontFamily: '"Press Start 2P", Arial, sans-serif', color: "#fff"}}>{team.name}</h2>
+            <img
+                  src={team.logo_path}
+                    alt={team.name}
+                    style={styles.image}
+            />
+            <br></br>
+            <h2 style={{fontFamily: 'sans-serif', color: "#fff", fontSize: "1rem"}}>Principal: {team.principal}</h2>
+            <h2 style={{fontFamily: ' sans-serif', color: "#fff", fontSize: "1rem"}}>Base: {team.base}</h2>
+            {/* <button
               style={styles.button}
               onClick={() => handleTeamClick(team.name)}
             >
               View Profile
-            </button>
+            </button> */}
           </div>
         ))}
       </div>
@@ -115,11 +135,14 @@ const styles = {
     padding: "25px",
     borderRadius: "15px",
     transition: "transform 0.3s, box-shadow 0.3s",
-    fontFamily: '"Press Start 2P", Arial, sans-serif'
+    fontFamily: '"Press Start 2P", Arial, sans-serif',
+    backgroundColor: "#fff",
   },
   image: {
     width: "100%",
     borderRadius: "10px",
+    maxHeight: "100px",
+    maxWidth: "150px",
   },
   name: {
     fontSize: "1.2rem",

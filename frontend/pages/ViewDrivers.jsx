@@ -9,6 +9,7 @@ const ViewDrivers = () => {
   const [searchQuery, setSearchQuery] = useState(""); // Search query
   const [filteredDrivers, setFilteredDrivers] = useState([]); 
   const navigate = useNavigate();
+  const background_Image = "/assets/images/ui/empty_grandstand.webp";
 
   // Fetch drivers from the backend
   useEffect(() => {
@@ -48,24 +49,28 @@ const ViewDrivers = () => {
   }, {});
 
   const handleDriverClick = (driverName) => {
-    navigate(`/driver-profile/${driverName}`);
+    const formattedName = driverName.replace(" ", "_").toLowerCase();
+    navigate(`/driver-profile/${encodeURIComponent(formattedName)}`);
   };
 
   return (
     <div style={{
-      backgroundColor: theme.backgroundColor,
-      color: theme.textColor,
-      minHeight: '100vh',
-      padding: '40px 20px',
-      fontFamily: '"Press Start 2P", Arial, sans-serif',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
+        backgroundImage: `url(${background_Image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        padding: "40px 20px",
+        fontFamily: '"Press Start 2P", Arial, sans-serif',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
     }}>
-      <h1 style={{ color: theme.primaryColor, marginBottom: '30px', textAlign: 'center', fontSize: '2rem' }}>View Drivers</h1>
+      <h1 style={{ color: theme.primaryColor, marginBottom: '30px', textAlign: 'center', fontSize: '1.8rem', fontFamily: '"Press Start 2P", Arial, sans-serif' }}>Drivers</h1>
 
       {/* Search Bar */}
-      <div style={{ marginBottom: '40px', width: '100%', maxWidth: '400px' }}>
+      <div style={{ marginBottom: '40px', width: '100%', maxWidth: '350px', alignItems: 'center' }}>
         <input
           type="text"
           placeholder="Search for a driver..."
@@ -94,7 +99,8 @@ const ViewDrivers = () => {
               marginBottom: '30px',
               fontSize: '1.5rem',
               borderBottom: `2px solid ${theme.primaryColor}`,
-              paddingBottom: '10px'
+              paddingBottom: '10px',
+              fontFamily: '"Press Start 2P", Arial, sans-serif'
             }}>{team}</h2>
             <div style={{
               display: 'grid',
@@ -105,7 +111,7 @@ const ViewDrivers = () => {
               {driversByTeam[team].map((driver) => (
                 <div key={driver.name} style={{
                   ...styles.card,
-                  backgroundColor: theme.cardBackground,
+                  backgroundColor:  theme.cardBackground,
                   boxShadow: `0 8px 16px ${theme.cardShadow}`,
                   border: `2px solid ${theme.primaryColor}`
                 }} onClick={() => handleDriverClick(driver.name)}>
@@ -140,7 +146,9 @@ const styles = {
     padding: "25px",
     borderRadius: "15px",
     transition: "transform 0.3s, box-shadow 0.3s",
-    fontFamily: '"Press Start 2P", Arial, sans-serif'
+    fontFamily: '"Press Start 2P", Arial, sans-serif',
+    color: 'rgba(255, 255, 255, 0.9)'
+   
   },
   cardHover: {
     transform: "scale(1.05)",

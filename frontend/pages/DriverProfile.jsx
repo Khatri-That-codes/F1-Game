@@ -26,17 +26,29 @@ const DriverProfile = () => {
 
   return (
     <div style={{
-      backgroundColor: theme.backgroundColor,
-      color: theme.textColor,
-      minHeight: '100vh',
-      padding: '40px 20px',
-      fontFamily: '"Press Start 2P", Arial, sans-serif',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center'
+        backgroundImage: `url('/assets/images/ui/f1_track_background.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        minHeight: "100vh",
+        padding: "40px 20px",
+        fontFamily: '"Press Start 2P", Arial, sans-serif',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+
+      // backgroundColor: theme.backgroundColor,
+      // color: theme.textColor,
+      // minHeight: '100vh',
+      // padding: '20px 20px',
+      // fontFamily: '"Press Start 2P", Arial, sans-serif',
+      // display: 'flex',
+      // flexDirection: 'column',
+      // alignItems: 'center',
+      // justifyContent: 'center'
     }}>
-      <h1 style={{ color: theme.primaryColor, marginBottom: '40px', textAlign: 'center' }}>Driver Profile</h1>
+      <h1 style={{ color: theme.primaryColor, marginBottom: '40px', textAlign: 'center' , fontFamily: "'Press Start 2P', Arial, sans-serif"}}>Driver Profile</h1>
       <div style={{
         ...styles.container,
         backgroundColor: theme.cardBackground,
@@ -104,14 +116,16 @@ const styles = {
     padding: "20px",
   },
   name: {
-    fontSize: "2rem",
+    fontSize: "1rem",
     color: "#fff",
     marginBottom: "10px",
+    fontFamily: "'Press Start 2P', Arial, sans-serif"
   },
   team: {
-    fontSize: "1.5rem",
-    color: "#000",
+    fontSize: "1rem",
+    color: "#ffffff",
     marginBottom: "20px",
+    fontFamily: "'Press Start 2P', Arial, sans-serif"
   },
   detail: {
     fontSize: "1rem",
