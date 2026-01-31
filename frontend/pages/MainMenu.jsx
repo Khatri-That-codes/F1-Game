@@ -50,7 +50,7 @@ const MainMenu = () => {
   return (
     <div style={styles.container}>
       <video style={styles.video} autoPlay loop muted>
-        <source src="assets/videos/f1_video.mp4" type="video/mp4" />
+        <source src="public/videos/f1_video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
