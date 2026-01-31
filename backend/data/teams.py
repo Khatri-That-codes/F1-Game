@@ -13,7 +13,7 @@ class Team:
         self.name = name
         self.team_colour = team_colour
         self.team_points = 0  
-        self.logo_path = f"/public/images/teams/{self.name.lower().replace(' ', '_')}.png"
+        self.logo_path = f"/images/teams/{self.name.lower().replace(' ', '_')}.png"
         self.base = base 
         self.principal = principal  
         self.championships = championships  

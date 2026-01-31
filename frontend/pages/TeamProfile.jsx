@@ -8,7 +8,7 @@ const TeamProfile = () => {
   const { teamName } = useParams(); // Get team name from URL
   const [team, setTeam] = useState(null); 
   const [error, setError] = useState(null); 
-  const background_Image = "/public/images/ui/f1_track_background.jpg";
+  const background_Image = "/images/ui/f1_track_background.jpg";
 
   const teamColour = team ? team.team_colour : "#FFFFFF";
   

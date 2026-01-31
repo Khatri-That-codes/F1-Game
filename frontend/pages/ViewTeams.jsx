@@ -10,7 +10,7 @@ const ViewTeams = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredTeams, setFilteredTeams] = useState([]);
   const navigate = useNavigate();
-  const background_Image = "/public/images/ui/empty_grandstand.webp";
+  const background_Image = "/images/ui/empty_grandstand.webp";
 
   useEffect(() => {
     const getTeams = async () => {

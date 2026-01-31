@@ -6,7 +6,7 @@ import { useTheme } from "../context/ThemeContext";
 const StandingsScreen = () => {
   const { theme } = useTheme();
   const [standings, setStandings] = useState([]); // Overall standings fetched from the backend
-  const background_Image = "/public/images/ui/standings.jpg";
+  const background_Image = "/images/ui/standings.jpg";
 
   // Fetch standings from the backend
   useEffect(() => {

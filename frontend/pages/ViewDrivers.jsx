@@ -9,7 +9,7 @@ const ViewDrivers = () => {
   const [searchQuery, setSearchQuery] = useState(""); // Search query
   const [filteredDrivers, setFilteredDrivers] = useState([]); 
   const navigate = useNavigate();
-  const background_Image = "/public/images/ui/empty_grandstand.webp";
+  const background_Image = "/images/ui/empty_grandstand.webp";
 
   // Fetch drivers from the backend
   useEffect(() => {

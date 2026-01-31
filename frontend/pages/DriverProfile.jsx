@@ -26,7 +26,7 @@ const DriverProfile = () => {
 
   return (
     <div style={{
-        backgroundImage: `url('/public/images/ui/f1_track_background.jpg')`,
+        backgroundImage: `url('/images/ui/f1_track_background.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
