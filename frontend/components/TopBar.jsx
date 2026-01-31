@@ -50,7 +50,7 @@ const TopBar = ({ title }) => {
 
   return (
     <div style={styles.container}>
-      <img src="/assets/images/ui/f1_logo.png" alt="F1 Logo" style={styles.logo} />
+      <img src="/public/images/ui/f1_logo.png" alt="F1 Logo" style={styles.logo} />
       <span style={styles.title}>F1 Simulator</span>
       <button
         onClick={handleBackClick}
