@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { fetchTracks, fetchDrivers } from "../api"; // Import centralized API functions
 import { Button, Card } from "../components/UIComponents";
 import { useTheme } from "../context/ThemeContext";
 
@@ -8,27 +7,45 @@ const RaceScreen = () => {
   const { theme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
-  const { selectedTrack, drivers } = location.state || {};
+  const { selectedTrack } = location.state || {};
 
-  if (!selectedTrack || !drivers) {
-    return (
-      <div
-        style={{
-          backgroundColor: theme.backgroundColor,
-          color: theme.textColor,
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <h1 style={{ color: theme.primaryColor }}>Race Screen</h1>
-        <p>No track or drivers selected. Please go back and select a track.</p>
-        <Button onClick={() => navigate("/track-select")}>Go Back</Button>
-      </div>
-    );
-  }
+  const [commentaryLog, setCommentaryLog] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!selectedTrack) {
+      navigate("/race-intro");
+      return;
+    }
+
+    const hardcodedData = {
+      qualifying_commentary: [
+        "Qualifying session begins!",
+        "Driver A sets the fastest lap!",
+        "Driver B spins out in sector 2!",
+        "Qualifying session ends!",
+      ],
+      final_commentary: [
+        "The race starts!",
+        "Driver A takes the lead!",
+        "Driver C overtakes Driver B!",
+        "Driver A wins the race!",
+      ],
+      final_results: ["Driver A", "Driver C", "Driver B"],
+    };
+
+    setCommentaryLog([...hardcodedData.qualifying_commentary, ...hardcodedData.final_commentary]);
+    setLoading(false);
+  }, [selectedTrack, navigate]);
+
+  const handleResultsClick = () => {
+    navigate("/results", {
+      state: {
+        raceResults: ["Driver A", "Driver C", "Driver B"],
+      },
+    });
+  };
 
   return (
     <div
@@ -38,41 +55,77 @@ const RaceScreen = () => {
         minHeight: "100vh",
         padding: "40px 20px",
         fontFamily: '"Press Start 2P", Arial, sans-serif',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center'
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      <h1 style={{ 
-        color: theme.primaryColor, 
-        marginBottom: "40px",
-        fontSize: '2.5rem',
-        textAlign: 'center'
-      }}>Race Screen</h1>
+      <h1
+        style={{
+          color: theme.primaryColor,
+          marginBottom: "40px",
+          fontSize: "2.5rem",
+          textAlign: "center",
+        }}
+      >
+        Race in Progress
+      </h1>
 
-      <Card style={{
-        backgroundColor: theme.cardBackground,
-        border: `3px solid ${theme.primaryColor}`,
-        borderRadius: '20px',
-        padding: '40px',
-        maxWidth: '600px',
-        width: '100%',
-        textAlign: 'center',
-        boxShadow: `0 10px 20px ${theme.cardShadow}`
-      }}>
-        <h2>Track: {selectedTrack.name}</h2>
-        <p>
-          <strong>Location:</strong> {selectedTrack.location}
-        </p>
-        <p>
-          <strong>Length:</strong> {selectedTrack.length} km
-        </p>
-      </Card>
+      {loading && <p>Loading race commentary...</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <div style={{ marginTop: "20px" }}>
-        <Button onClick={() => navigate("/race-intro")}>Back to Intro</Button>
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+        {["black", "black", "black", "black", "black"].map((color, index) => (
+          <div
+            key={index}
+            style={{
+              width: "30px",
+              height: "30px",
+              borderRadius: "50%",
+              backgroundColor: color,
+            }}
+          ></div>
+        ))}
       </div>
+
+      <div
+        style={{
+          backgroundColor: theme.cardBackground,
+          border: `3px solid ${theme.primaryColor}`,
+          borderRadius: "20px",
+          padding: "20px",
+          maxWidth: "600px",
+          width: "100%",
+          textAlign: "left",
+          boxShadow: `0 10px 20px ${theme.cardShadow}`,
+          overflowY: "auto",
+          maxHeight: "400px",
+          marginBottom: "20px",
+        }}
+      >
+        {commentaryLog.map((comment, index) => (
+          <p key={index} style={{ margin: "10px 0" }}>
+            {comment}
+          </p>
+        ))}
+      </div>
+
+      <Button
+        onClick={handleResultsClick}
+        style={{
+          marginTop: "20px",
+          padding: "10px 20px",
+          fontSize: "1rem",
+          backgroundColor: theme.primaryColor,
+          color: theme.textColor,
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+        }}
+      >
+        Go to Results
+      </Button>
     </div>
   );
 };
