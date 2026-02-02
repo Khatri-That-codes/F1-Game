@@ -10,6 +10,10 @@ This project is an attempt towards full stack dev with the use of:
 - **FastAPI**: For creating RESTful API endpoints.
 - **Python**: Core logic for race simulation and data management.
 
+
+Currently deployed on **Render**
+
+## Project Outline
 An interactive F1 racing simulation game where users can:
 - Select a track and simulate a race.
 - View detailed driver profiles.
